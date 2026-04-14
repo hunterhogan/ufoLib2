@@ -110,7 +110,7 @@ def test_data_images_init() -> None:
 @pytest.mark.parametrize(
     "lazy", [None, False, True], ids=["lazy-unset", "non-lazy", "lazy"]
 )
-def test_pickle_lazy_font(datadir: Path, lazy: Optional[bool]) -> None:
+def test_pickle_lazy_font(datadir: Path, lazy: bool | None) -> None:
     if lazy is not None:
         font = Font.open(datadir / "UbuTestData.ufo", lazy=lazy)
     else:

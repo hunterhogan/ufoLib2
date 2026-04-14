@@ -33,7 +33,7 @@ class Component:
     transformation: Transform = field(default=Identity, converter=_convert_transform)
     """The affine transformation to apply to the :attr:`.Component.baseGlyph`."""
 
-    identifier: Optional[str] = None
+    identifier: str | None = None
     """The globally unique identifier of the component."""
 
     def move(self, delta: tuple[float, float]) -> None:

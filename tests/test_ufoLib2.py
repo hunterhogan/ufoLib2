@@ -278,7 +278,7 @@ def test_features_normalize_newlines() -> None:
     ],
 )
 def test_convert_on_setattr(
-    klass: Type[Any], attr_name: str, attr_type: Type[Any], obj: Any
+    klass: type[Any], attr_name: str, attr_type: type[Any], obj: Any
 ) -> None:
     o = klass()
     assert isinstance(getattr(o, attr_name), attr_type)

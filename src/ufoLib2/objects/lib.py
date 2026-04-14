@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Mapping, Union, cast
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, Dict, Union, cast
 
 from ufoLib2.constants import DATA_LIB_KEY
 from ufoLib2.serde import serde
@@ -64,7 +65,7 @@ def _unstructure_data(value: Any, converter: Converter) -> Any:
 
 
 def _structure_data_inplace(
-    key: Union[int, str], value: Any, container: Any, converter: Converter
+    key: int | str, value: Any, container: Any, converter: Converter
 ) -> None:
     if isinstance(value, list):
         for i, v in enumerate(value):
@@ -77,7 +78,7 @@ def _structure_data_inplace(
 
 
 @serde
-class Lib(Dict[str, Any]):
+class Lib(dict[str, Any]):
     def _unstructure(self, converter: Converter) -> dict[str, Any]:
         # avoid encoding if converter supports bytes natively
         test = converter.unstructure(b"\0")
@@ -92,7 +93,7 @@ class Lib(Dict[str, Any]):
     @staticmethod
     def _structure(
         data: Mapping[str, Any],
-        cls: Type[Lib],
+        cls: type[Lib],
         converter: Converter,
     ) -> Lib:
         self = cls(data)
